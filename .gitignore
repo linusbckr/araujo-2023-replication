@@ -1,0 +1,29 @@
+# This file overrides a parent repository's ignore rules, which are written for
+# a research tree and would exclude artefacts this package is meant to ship
+# (outputs/coefficients.csv is documented in the README and must be tracked).
+
+__pycache__/
+*.py[cod]
+
+# Downloaded and rebuilt inputs — everything under data/ EXCEPT the small
+# artefacts that ship with the package.
+data/*.nc
+data/*.pkl
+data/gee_lai_cache/
+data/era5_cache/
+!data/README.md
+!data/grid_amazon_0p25.csv
+!data/amazon_domain.geojson
+
+# Demo mode writes here so it can never overwrite the committed full-mode
+# results; rebuild verification writes to outputs_rebuild/.
+outputs_demo/
+outputs_rebuild/
+
+# ...but the committed full-mode table must be tracked: the README documents it
+# as an output, and a parent repository's blanket *.csv rule would drop it.
+!outputs/coefficients.csv
+
+*.log
+.DS_Store
+.venv/

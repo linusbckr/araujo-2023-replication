@@ -1,0 +1,36 @@
+# Standalone replication of Araujo et al. (2023), PNAS 120(46) e2312451120.
+#
+# Deliberately minimal: these four are the only packages imported anywhere in
+# the package, and demo mode needs nothing else at all. Version floors, not
+# pins, so the package installs cleanly into an existing environment; it was
+# developed against numpy 2.4, scipy 1.17, pandas 3.0, matplotlib 3.10.
+
+numpy>=1.24
+scipy>=1.10
+pandas>=2.0
+matplotlib>=3.6        # figures, and point-in-polygon for --domain-from-polygon
+
+# Needed only to REBUILD the full-mode input (--build-inputs, --fetch-raw).
+# The estimation itself, and --demo, do not import them.
+xarray>=2023.1         # reading the two monthly NetCDF inputs
+netCDF4>=1.6           # the NetCDF engine xarray dispatches to
+# earthengine-api      # --fetch-raw --what lai   (then: earthengine authenticate)
+# cdsapi               # --fetch-raw --what wind  (key in ~/.cdsapirc)
+
+# NOT REQUIRED, and deliberately so:
+#
+#   linearmodels   The FD-2SLS estimator here is written out by hand in
+#                  src/estimation.py, because the replication needs three things
+#                  a general IV package does not give directly: a thin-QR
+#                  projection that never forms (Z'Z)^-1, an SVD second stage
+#                  with an explicit rank cutoff, and Sanderson-Windmeijer
+#                  conditional F statistics (the naive per-variable partial F is
+#                  not a valid weak-instrument test with 21 endogenous
+#                  regressors). Adding the dependency would not shorten the code
+#                  and would make the numerics someone else's black box. If you
+#                  want an independent check, `pip install linearmodels` and
+#                  compare Model 1 against IV2SLS with the same columns; it
+#                  agrees to ~1e-12.
+#   pyarrow        Not needed: full mode reads a pickle, not Parquet.
+#   geopandas      Not needed: no shapefile is read here. The estimation-domain
+#                  polygon is applied upstream, in the parent pipeline.
