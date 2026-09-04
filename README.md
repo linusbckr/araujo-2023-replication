@@ -23,6 +23,14 @@ this package and a sample defect in the pipeline.
 It is also **self-contained**. Every input can be downloaded and rebuilt from
 public sources by the code in `src/`; nothing has to be requested from anyone.
 
+**Scope.** This is a working replication, and it exists so that anything I report
+about the paper can be checked line by line. The specification it targets was
+clarified by the authors in correspondence. Where my numbers differ from theirs
+the difference is stated with the measurement behind it; where a difference is
+unexplained it is left unexplained rather than attributed. Corrections are
+welcome, and especially so from the authors — if anything here misrepresents the
+method, please open an issue and I will fix it.
+
 ---
 
 ## Quickstart
@@ -187,24 +195,28 @@ total beyond k = 13 against their 9.9%. If anything it is slightly *too* spread:
 The residual is a *level* gap at approximately correct shape, spread evenly over
 the twenty shells rather than concentrated at any distance.
 
-**The author-confirmed column is the weakest of the six on the multiplier.** 1.050
+**The gap is largest on the construction the authors confirmed.** Ω² mean 1.050
 against their 2.00, where season-matched/composition reaches 1.237 and
-authors-346/composition 1.530. Their β₁ is bracketed by the two instrument forms on
-their own sample (0.0049 < 0.0811 < 0.1469); their Σβ_k is above both. The
-composition instrument also buys β at α's expense — 0.1932 on their sample, 12%
-below the published value and the worst α of the six — which is independent
-evidence against it.
+authors-346/composition 1.530. Their β₁ is bracketed by the two instrument forms
+on their own sample (0.0049 < 0.0811 < 0.1469), and their Σβ_k sits above both.
+That is not a reason to prefer the composition columns: composition buys β at α's
+expense — 0.1932 on their sample, 12% below the published value and the furthest
+of the six — which is evidence against reading it as the better estimate.
 
-### Why the binary instrument attenuates
+### The two channels in W_t^[k]Y behave differently here
+
+What follows is a property of this estimator on this panel, not a recommendation
+about the paper's specification — that one is author-confirmed, and it is what the
+tables above report as the headline.
 
 The count factor is shared between the regressor and the instrument, so it enters
 Cov(z, x) without entering Cov(z, Δy); since β_IV = Cov(z, Δy)/Cov(z, x) it
 inflates the denominator alone. At k = 1 it supplies **83%** of the binary
-instrument's variance, which accounts for the ~28× gap between the two
-instruments. Estimated separately, the composition coefficient is 0.0908
-(t = 18.1) and the count coefficient is 0.0003 (t = 1.4); the restriction that
-they are equal — which the binary specification imposes — is rejected at
-χ²(20) = 472.6.
+instrument's variance, which accounts for the ~28× gap between the two instrument
+forms. Estimated separately on this panel, the composition coefficient is 0.0908
+(t = 18.1) and the count coefficient is 0.0003 (t = 1.4), and the
+equal-coefficient restriction is rejected at χ²(20) = 472.6. Whether that reflects
+something about the specification or something about my data is not settled here.
 
 ---
 
@@ -312,6 +324,13 @@ shell — and that arm is a robustness check rather than a fidelity gap, since t
 paper's own wind data is monthly. On the author-confirmed specification the
 residual is a level difference at approximately correct shape, which vertical
 shear would not produce.
+
+## Acknowledgement
+
+I am grateful to the authors for answering a replication query in August 2026.
+Their reply resolved two ambiguities in the construction of the instrument that
+no amount of work on my side could have settled, and the specification reported
+here as the headline is theirs rather than my reading of it. Any errors are mine.
 
 ## Citation
 
