@@ -292,18 +292,26 @@ K = 20, on the 9,550-pixel Amazon domain in `data/`. `--fetch-raw` plus
 with numbers, and names the two construction choices that are yours rather than
 defaulted.
 
-One known construction difference from the paper remains: the trajectories are
-effectively **2-D isobaric**, because the wind input carries a single pressure
-level, while the paper says "kinematic". This was the leading candidate while the
-residual looked like a *shape* difference, since 3-D advection turns and lengthens
-paths through vertical shear without inflating row sums. It has since been
-measured on a 2×2 pilot over cadence × dimensionality and is inert: at monthly
-cadence 3-D moves shell mass by 0.3% and upwind composition by 0.1%, and at
-sub-daily cadence, where the vertical channel is demonstrably live, the network is
-almost entirely rewired (2–12% link overlap) yet delivers the same upwind LAI to
-within 2% at every shell. On the author-confirmed specification the residual is a
-level difference at approximately correct shape, which vertical shear would not
-produce.
+One known construction difference from the paper remains: the trajectories here
+are effectively **2-D isobaric**, because the wind input carries a single
+pressure level, whereas the paper builds its back-trajectories from "monthly
+three-dimensional wind data" and its SI pseudo-code advects pressure at every
+step. Everything else about the integration matches what the SI specifies —
+launch at 800 hPa, one-hour steps, a five-day window — the one-hour step being
+the integration step size rather than the cadence of the wind data, which the
+paper states is monthly.
+
+The vertical channel was the leading candidate while the residual looked like a
+*shape* difference, since 3-D advection turns and lengthens paths through
+vertical shear without inflating row sums. It has since been measured on a 2×2
+pilot over cadence × dimensionality and is inert: at monthly cadence 3-D moves
+shell mass by 0.3% and upwind composition by 0.1%. At sub-daily cadence the
+vertical channel is demonstrably live and the network is almost entirely rewired
+(2–12% link overlap), yet it delivers the same upwind LAI to within 2% at every
+shell — and that arm is a robustness check rather than a fidelity gap, since the
+paper's own wind data is monthly. On the author-confirmed specification the
+residual is a level difference at approximately correct shape, which vertical
+shear would not produce.
 
 ## Citation
 
